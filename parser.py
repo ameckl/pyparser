@@ -1,6 +1,6 @@
 from copy import deepcopy
 
-from models import Element, Production
+from models import Action, Element, Production, Table, TableEntry
 from reader import Reader, sc_argparse
 from pyscanner.pyscanner import PyScanner
 from pyscanner import CONFIG
@@ -12,34 +12,14 @@ def pretty_print(work_stack, input_stack, output_band):
 
 def stringify_list(input_list, comma=False):
     ret = ''
-    c = 0
+    counter = 0
     for element in input_list:
-        if not comma or c == 0:
+        if not comma or counter == 0:
             ret += str(element)
         else:
             ret += ', ' + str(element)
-        c += 1
+        counter += 1
     return ret
-
-
-class Table(object):
-    def __init__(self):
-        self.entries = {}
-
-
-class Action(object):
-    def __init__(self, action, number):
-        self.action = action
-        self.number = number
-
-    def __str__(self):
-        return '{} - {}'.format(self.action, self.number)
-
-
-class TableEntry(object):
-    def __init__(self, action, goto):
-        self.action = action
-        self.goto = goto
 
 
 class Parser(object):

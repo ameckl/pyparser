@@ -59,3 +59,23 @@ class Grammar(object):
         self.augmented_starting = Element(name="S'", terminal=False, augmented=True)
         augmented_prod = Production(lhs=self.augmented_starting, rhs=[self.starting_symbol])
         self.productions.add(production=augmented_prod)
+
+
+class Table(object):
+    def __init__(self):
+        self.entries = {}
+
+
+class Action(object):
+    def __init__(self, action, number):
+        self.action = action
+        self.number = number
+
+    def __str__(self):
+        return '{} - {}'.format(self.action, self.number)
+
+
+class TableEntry(object):
+    def __init__(self, action, goto):
+        self.action = action
+        self.goto = goto
